@@ -29,9 +29,11 @@ export const newUser = async (
 	try {
 		const result: any = await collection.insertOne(newUserData);
 		if (result.insertedId != undefined) {
+			const usuarios = await collection.find().toArray();
 			res.send({
 				status: "ok",
 				message: "Nuevo usuario insertado correctamente",
+				usuarios: usuarios,
 			});
 		}
 	} catch (error) {
